@@ -13,6 +13,13 @@ export class LivreurService {
     @InjectRepository(Livreur)
     private readonly livreurRepository:Repository<Livreur>
     ){}
+    async findOne(id: number): Promise<Livreur> {
+      const livreur = await this.livreurRepository.findOne({ where: { id } });
+      if (!livreur) {
+        throw new NotFoundException(`Livreur #${id} not found`);
+      }
+      return livreur;
+    }
     
     async findOneByEmail(email:string):Promise<Livreur |undefined>{
       return await this.livreurRepository.findOne({where:{email:email}})

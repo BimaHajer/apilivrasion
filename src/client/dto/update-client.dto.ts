@@ -7,6 +7,6 @@ export class UpdateClientDto extends PartialType(CreateClientDto) {
     public password?: string;
     public email?: string;
    public address?: string; 
-   public phone?: number;
+   public phone?: string;
     public tokenValue?: string;  
 }
