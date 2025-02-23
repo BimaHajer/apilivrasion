@@ -32,5 +32,7 @@ export class User {
   updatedBy: number;
   @Column('boolean',{name:"active",nullable:true})
   isActive:boolean
+  @Column('integer',{name:"saltround",nullable:true})
+  saltround:number
 }
   

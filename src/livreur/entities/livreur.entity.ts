@@ -17,11 +17,11 @@ export class Livreur {
   @Column('text', { name: 'telephone', nullable: true })
   telephone: string;
 
-  @Column('text', { name: 'password', nullable: true })
-  password: string;
+  // @Column('text', { name: 'password', nullable: true })
+  // password: string;
 
-  @Column('text', { name: 'confirmPassword', nullable: true })
-  confirmPassword: string;
+  // @Column('text', { name: 'confirmPassword', nullable: true })
+  // confirmPassword: string;
 
   @Column('text', { name: 'role', default: 'livreur' })
   role: string;

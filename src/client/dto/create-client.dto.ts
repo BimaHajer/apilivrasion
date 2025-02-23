@@ -1,8 +1,13 @@
 export class CreateClientDto {
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     email: string;
-    phone: string;
-    address: string;
-    password: string;
+    telephone: string;
+    adress: string;
+  createAt: Date;
+  updateAt:Date; 
+  createBy:number; 
+  updatedBy:number; 
+ 
+    
 }

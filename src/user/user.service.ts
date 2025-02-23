@@ -26,15 +26,16 @@ export class UserService {
     
         let newUser = this.userRepository.create(createUserDto)
         newUser.isActive = true
-       
-        
-        newUser.password = (await this.hashPassword(newUser.password)).toString()
+        newUser.saltround=10
+        const salt = await bcrypt.genSalt(newUser.saltround); 
+        console.log(salt)
+        newUser.password = (await this.hashPassword(newUser.password,newUser.saltround)).toString()
         return await this.userRepository.save(newUser);
       }
       
-      async hashPassword(password: string): Promise<string> {
-        const saltRounds = 10; // Number of salt rounds to use for hashing
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+      async hashPassword(password: string,saltround:number): Promise<string> {
+       
+        const hashedPassword = await bcrypt.hash(password, saltround);
         return hashedPassword;
     
     
@@ -54,7 +55,7 @@ export class UserService {
         }
     
         if (updateUserDto.password) {
-          updateUserDto.password = (await this.hashPassword(updateUserDto.password)).toString()
+          updateUserDto.password = (await this.hashPassword(updateUserDto.password,user.saltround)).toString()
         }
     
         const userPreload = await this.userRepository.preload({

@@ -5,28 +5,25 @@ export class Client {
   @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
 
-  @Column('text', { name: 'firstName', nullable: true })
-  firstName: string;
+  @Column('text', { name: 'firstname', nullable: true })
+  firstname: string;
 
-  @Column('text', { name: 'lastName', nullable: true })
-  lastName: string;
+  @Column('text', { name: 'lastname', nullable: true })
+  lastname: string;
 
   @Column('text', { name: 'email', nullable: true, unique: true })
   email: string;
 
-  @Column('text', { name: 'phone', nullable: true })
-  phone: string;
+  @Column('text', { name: 'telephone', nullable: true })
+  telephone: string;
 
-  @Column('text', { name: 'address', nullable: true })
-  address: string;
-
-  @Column('text', { name: 'password', nullable: true })
-  password: string;
+  @Column('text', { name: 'adress', nullable: true })
+  adress: string;
   @Column('text',{name:"token",nullable:true})
   token: string;
   @Column('date',{name:"createAt",nullable:true})
   createAt:Date;
-  @Column('date',{name:"update",nullable:true})
+  @Column('date',{name:"updateAt",nullable:true})
   updateAt:Date;
   @Column('integer',{name:"createby",nullable:true})
   createBy:number;
