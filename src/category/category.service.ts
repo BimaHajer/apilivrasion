@@ -12,9 +12,9 @@ export class CategoryService {
     private categoryResposity:Repository<Category>,
   ){}
   async create(createCategoryDto:CreateCategoryDto) {
-    let newColor=this.categoryResposity.create(createCategoryDto)
+    let newCategory=this.categoryResposity.create(createCategoryDto)
   
-    return await this.categoryResposity.save(newColor)
+    return await this.categoryResposity.save(newCategory)
   }  
 
 
@@ -35,9 +35,12 @@ export class CategoryService {
   
   
       const categoryPreload = await this.categoryResposity.preload({
-        id: +id, 
-        ...UpdateCategoryDto,
-        updatedBy: userId, 
+        id: +id,
+        name: UpdateCategoryDto.name,
+        description: UpdateCategoryDto.description,
+        status: UpdateCategoryDto.status,
+        createBy: Number(UpdateCategoryDto.createBy), // Correction ici
+        updatedBy: userId,
       });  
   
       return this.categoryResposity.save(categoryPreload);

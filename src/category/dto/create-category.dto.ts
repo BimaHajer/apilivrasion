@@ -1,6 +1,11 @@
 export class CreateCategoryDto {
-    public id?: number ;
-    public name?: string ;
-    public description?: string ;
-    public status?: boolean ;
+    id: number ;
+     name: string ;
+     description: string ;
+     status: boolean ;
+     createAt: Date ;
+     updatedBy: number ;
+     isActive: boolean ;
+     createBy: number ;
+     updateAt: Date ;
 }

@@ -1,13 +1,19 @@
+import { Picture } from "src/pictures/entities/picture.entity";
+
 export class CreateMarkDto {
     id: number;
   
-    name: string;
+    titre: string;
   
     description: string;
   
-    dateCreation: string;
-  
-    status: boolean;
-    
-    image:string;
+     status: boolean ;
+     picture: string ;
+     createAt: Date ;
+    updateAt: Date ;
+     isActive: boolean ;
+     createBy: number ;
+    updatedBy: number ;
+   pictures: Picture[];
 }
+

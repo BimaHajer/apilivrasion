@@ -1,4 +1,8 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "src/category/entities/category.entity";
+import { Mark } from "src/marks/entities/mark.entity";
+import { Picture } from "src/pictures/entities/picture.entity";
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ProduitDetail } from "../dto/create-produit.dto";
 
 @Entity()
 export class Produit {
@@ -18,6 +22,38 @@ export class Produit {
     updatedBy:number;
     @Column('boolean',{name:"active",nullable:true})
     isActive:boolean
+    @Column("double precision", { name: "priceHorsTax", nullable: true })
+    priceHorsTax: number | null;
+    @Column("double precision", { name: "priceTTC", nullable: true })
+    priceTTC: number | null;
+    @ManyToOne(() => Mark, (mark: Mark) => mark.produits)
+    @JoinColumn({ name: "markId" })
+    markId: number | null; 
+    @ManyToOne(() => Category, (category: Category) => category.produits)
+    @JoinColumn({ name: "category" })
+    categoryId: number | null; 
+    @OneToMany(() => Picture, ( pictures:Picture) =>  pictures.produitId,{cascade:true})
+    pictures: Picture[];
+
+
+    // @OneToMany(() => ProduitDetail, (produitDetail: ProduitDetail) => produitDetail.produitId,{cascade:true})
+    // produitDetail: ProduitDetail[];
+
+   
+
+
+    @BeforeInsert()
+CreateATDate(): void{
+this.createAt=new Date()
+
+}
+
+@BeforeUpdate()
+updateATDate() :void{
+    this.updateAt= new Date()
+}
+
+    
 }
 
 

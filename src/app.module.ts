@@ -9,6 +9,11 @@ import { LivreurModule } from './livreur/livreur.module';
 import { ProduitsModule } from './produits/produits.module';
 import { CategoryModule } from './category/category.module';
 import { MarksModule } from './marks/marks.module';
+import { PicturesModule } from './pictures/pictures.module';
+import { RestaurantModule } from './restaurant/restaurant.module';
+import { PriceModule } from './price/price.module';
+import { TvaModule } from './tva/tva.module';
+import { DetailsModule } from './details/details.module';
 
 @Module({
   imports: [
@@ -32,6 +37,11 @@ import { MarksModule } from './marks/marks.module';
     ProduitsModule,
     CategoryModule,
     MarksModule,
+    PicturesModule,
+    RestaurantModule,
+    PriceModule,
+    TvaModule,
+    DetailsModule,
    
   ],
   controllers: [AppController],

@@ -23,7 +23,8 @@ export class UserController {
 
   @Get('detail-user/:id')
   findOne(@Param('id') id: number) {
-    return this.userService.findOneById(+id);
+    console.log("id",id)
+    return this.userService.findOneById(id);
   }
 
   @Patch('update-user/:id')

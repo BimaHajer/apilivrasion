@@ -13,6 +13,8 @@ export class Client {
 
   @Column('text', { name: 'email', nullable: true, unique: true })
   email: string;
+  @Column('text', { name: 'password', nullable: true, unique: true })
+  password: string;
 
   @Column('text', { name: 'telephone', nullable: true })
   telephone: string;

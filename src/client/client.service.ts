@@ -18,7 +18,6 @@ export class ClientService {
     private readonly clientRepository:Repository<Client>
     ){}
    
-    
     async findOneByEmail(email:string):Promise<Client |undefined>{
       return await this.clientRepository.findOne({where:{email:email}})
     }
@@ -62,6 +61,7 @@ export class ClientService {
         let client = await this.clientRepository.findOne({ where: { id: id } })
         return client
       }
+      
        async update(id: number, clientId: number, updateClientDto: UpdateClientDto) {
         const client = await this.clientRepository.findOne({ where: { id: id } });
         if (!client) {
@@ -81,7 +81,7 @@ export class ClientService {
         return this.clientRepository.save(clientPreload);
     
       }
-      async remove(id: number) {
+      async remove(id: string) {
         return await this.clientRepository.delete(id);
       }
       async removeMultiple(toDelete: number[]) {   
@@ -104,4 +104,5 @@ export class ClientService {
     
       return true 
       }
+     
 }

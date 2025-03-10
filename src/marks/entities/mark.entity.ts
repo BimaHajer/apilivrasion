@@ -1,11 +1,12 @@
-import {Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Produit } from "src/produits/entities/produit.entity";
+import {BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Mark {
     @PrimaryGeneratedColumn()
     id: number;
-    @Column( 'text',{name:"name", nullable:true})
-    name: string;
+    @Column( 'text',{name:"titre", nullable:true})
+    title: string;
     @Column('text',{name:"description",nullable:true})
     description: string;
     @Column('text',{name:"status",nullable:true})
@@ -22,4 +23,10 @@ export class Mark {
     updatedBy:number;
     @Column('boolean',{name:"active",nullable:true})
     isActive:boolean
+    @OneToMany(() => Produit, (produit: Produit) => produit.markId)
+    produits:Produit[]
+     @BeforeInsert()
+        createDate(){
+            this.createAt= new Date()
+        }
 }

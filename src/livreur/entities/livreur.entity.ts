@@ -31,10 +31,8 @@ export class Livreur {
 
   @Column('boolean', { name: 'availability', default: true })
   availability: boolean;
-
   @Column('text', { name: 'token', nullable: true })
   token: string;
-
   @Column('date',{name:"createAt", nullable: true})
   createAt:Date;
   @Column('date',{name:"update", nullable: true})
@@ -44,5 +42,7 @@ export class Livreur {
   @Column('integer',{name:"updateBy",nullable:true})
   updatedBy: number;
   @Column('boolean',{name:"active",nullable:true})
-  isActive:boolean
+  isActive:boolean;
+  @Column('text',{name:"position",nullable:true})
+  position:string
 }

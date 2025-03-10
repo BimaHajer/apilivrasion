@@ -44,8 +44,10 @@ export class UserService {
     
         return this.userRepository.findAndCount()
       }
-      async findOneById(id: number): Promise<object> {
+      async findOneById(id: number) {
         let user = await this.userRepository.findOne({ where: { id: id } })
+        console.log('user',user)
+
         return user
       }
        async update(id: number, userId: number, updateUserDto: UpdateUserDto) {

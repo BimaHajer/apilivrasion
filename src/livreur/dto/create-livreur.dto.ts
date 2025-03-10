@@ -8,5 +8,6 @@ export class CreateLivreurDto {
   updateAt:Date; 
   createBy:number; 
   updatedBy:number; 
+  position:string;
   
 }

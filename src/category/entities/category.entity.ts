@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-Entity()
+import { Produit } from "src/produits/entities/produit.entity";
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+@Entity("Category")
 export class Category {
     @PrimaryGeneratedColumn()
     id: number;
@@ -20,4 +21,10 @@ export class Category {
     updatedBy:number;
     @Column('boolean',{name:"active",nullable:true})
     isActive:boolean 
+    @OneToMany(() => Produit, (produit: Produit) => produit.categoryId)
+        produits:Produit[]
+    @BeforeInsert()
+    createDate(){
+        this.createAt= new Date()
+    }
 }
