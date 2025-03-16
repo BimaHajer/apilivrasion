@@ -3,8 +3,9 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 import { jwtConstants } from './constants';
-import { LoginUserDto } from './auth';
+import { LoginClientDto, LoginUserDto } from './auth';
 import { ClientService } from 'src/client/client.service';
+import { Client } from 'src/client/entities/client.entity';
 
 const bcrypt=require('bcrypt')
 @Injectable()
@@ -48,26 +49,26 @@ export class AuthService {
       }
       
       async validCLient(email:string,password:string):Promise<any>{
-        const user = await this.clientService.findOneByEmail(email);
-        if(user){
-          console.log("user",user)
-          const isPasswordMatching =await (bcrypt.compare(password,user.password));
+        const client = await this.clientService.findOneByEmail(email);
+        if(client){
+          console.log("client",client)
+          const isPasswordMatching =await (bcrypt.compare(password,client.password));
           if(isPasswordMatching){
-            console.log("userr",user)
-            return user;
+            console.log("client",client)
+            return client;
           }
         }
         return null;
       }
-      async loginCLient (client:  LoginUserDto) {
-        const objectUser :User= await this.ValidateUser(client.email,client.password)
-        if (objectUser) {
-         const payload = { id:objectUser.id,email:objectUser.email,role:objectUser.role};
+      async loginCLient (client:  LoginClientDto) {
+        const objectClient :Client= await this.validCLient(client.email,client.password)
+        if (objectClient) {
+         const payload = { id:objectClient.id,email:objectClient.email};
 
          return{
-          userId:objectUser.id,
+          clientId:objectClient.id,
           access_token: this.jwtService.sign(payload, { secret: jwtConstants.secret }),
-          role:objectUser.role,
+          
 
          };
 

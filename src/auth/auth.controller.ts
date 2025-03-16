@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post,Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginUserDto } from './auth';
+import { LoginClientDto, LoginUserDto } from './auth';
 
 
 @Controller('auth')
@@ -15,7 +15,7 @@ export class AuthController {
     }
     //authclient 
     @Post('login-client')
-    loginClient(@Body() signInDto: LoginUserDto) {
+    loginClient(@Body() signInDto: LoginClientDto) {
       return this.authService.loginCLient(signInDto);
       
     }
