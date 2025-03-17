@@ -17,9 +17,9 @@ export class ClientController {
     return this.clientService.findAll();
   }
 
-  @Get('detail-client:id')
-  findOne(@Param('id') id: string) {
-    return this.clientService.findOne(+id);
+  @Get('detail-client/:id')
+  findOne(@Param('id') id: number) {
+    return this.clientService.findOneById(id);
   }
 
   @Patch('update-client/:id')
@@ -29,7 +29,7 @@ export class ClientController {
       } 
     
       @Delete('delete-client/:id')
-      remove(@Param('id') id: number) {
+      remove(@Param('id') id: string) {
         return this.clientService.remove(id);
       } 
       @Post('delete-multiple')

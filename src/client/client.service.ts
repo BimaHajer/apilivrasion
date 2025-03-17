@@ -17,7 +17,7 @@ export class ClientService {
     @InjectRepository(Client)
     private readonly clientRepository:Repository<Client>
     ){}
-    
+   
     async findOneByEmail(email:string):Promise<Client |undefined>{
       return await this.clientRepository.findOne({where:{email:email}})
     }
@@ -26,39 +26,51 @@ export class ClientService {
         const client=await this.clientRepository.findOne({ where:{email:email}});
         return client.id 
       }
-      async create(createClientDto: CreateClientDto): Promise<Client> {
-        let newClient = this.clientRepository.create({ ...createClientDto });
-        newClient.isActive = true;
-        newClient.password = await this.hashPassword(newClient.password);
-        
-        return await this.clientRepository.save(newClient);
-      }
+      async create(createClientDto: CreateClientDto) {
+          let newClient=this.clientRepository.create(createClientDto)
+          return await this.clientRepository.save(newClient)
+        }
+
+     
+      // async create(createClientDto: CreateClientDto): Promise<Client> {
+      //   if (!createClientDto.password) {
+      //     throw new Error("Password is required");
+      //   }
       
+      //   let newClient = this.clientRepository.create({ ...createClientDto });
+      //   newClient.isActive = true;
+      //   newClient.password = await this.hashPassword(createClientDto.password);
       
-      async hashPassword(password: string): Promise<string> {
-        const saltRounds = 10; // Number of salt rounds to use for hashing
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-        return hashedPassword;
-    
-    
-      }
-      findAll(): Promise<[Client[], number]> {
-    
-        return this.clientRepository.findAndCount()
+      //   return await this.clientRepository.save(newClient);
+      // }
+      
+     
+      // async hashPassword(password: string): Promise<string> {
+      //   if (!password) {
+      //     throw new Error("Password is required for hashing");
+      //   }
+      
+      //   const saltRounds = 10; 
+      //   return await bcrypt.hash(password, saltRounds);
+      // }
+      async findAll(): Promise<Client[]> {
+        // Utilise ton repository pour récupérer tous les clients
+        return await this.clientRepository.find();
       }
       async findOneById(id: number): Promise<object> {
         let client = await this.clientRepository.findOne({ where: { id: id } })
         return client
       }
+      
        async update(id: number, clientId: number, updateClientDto: UpdateClientDto) {
         const client = await this.clientRepository.findOne({ where: { id: id } });
         if (!client) {
           throw new NotFoundException(`client #${id} not found`);
         }
     
-        if (updateClientDto.password) {
-          updateClientDto.password = (await this.hashPassword(updateClientDto.password)).toString()
-        }
+        // if (updateClientDto.password) {
+        //   updateClientDto.password = (await this.hashPassword(updateClientDto.password)).toString()
+        // }
     
         let clientPreload = await this.clientRepository.preload({
           id: +id,
@@ -69,7 +81,7 @@ export class ClientService {
         return this.clientRepository.save(clientPreload);
     
       }
-      async remove(id: number) {
+      async remove(id: string) {
         return await this.clientRepository.delete(id);
       }
       async removeMultiple(toDelete: number[]) {   
@@ -92,4 +104,5 @@ export class ClientService {
     
       return true 
       }
+     
 }

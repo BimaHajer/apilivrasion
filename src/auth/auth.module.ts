@@ -6,6 +6,7 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 
 import { jwtConstants } from './constants';
 import { AuthGuard } from './auth.guard';
+import { ClientModule } from 'src/client/client.module';
 
 
 
@@ -13,6 +14,7 @@ import { AuthGuard } from './auth.guard';
   controllers: [AuthController],
   imports: [
     UserModule,
+    ClientModule,
     
     JwtModule.register({
       secret: jwtConstants.secret,

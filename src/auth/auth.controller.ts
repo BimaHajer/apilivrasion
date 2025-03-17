@@ -13,6 +13,12 @@ export class AuthController {
       return this.authService.signIn(signInDto);
       
     }
+    //authclient 
+    @Post('login-client')
+    loginClient(@Body() signInDto: LoginUserDto) {
+      return this.authService.loginCLient(signInDto);
+      
+    }
 
     @Get('profile')
     getProfile(@Request() req) {

@@ -29,23 +29,29 @@ export class LivreurService {
         const livreur=await this.livreurRepository.findOne({ where:{email:email}});
         return livreur.id 
       }
-    async create(createLivreurDto: CreateLivreurDto) {
+       async create(createLivreurDto: CreateLivreurDto) {
+                let newLivreur=this.livreurRepository.create(createLivreurDto)
+                return await this.livreurRepository.save(newLivreur)
+              }
+    // async create(createLivreurDto: CreateLivreurDto) {
       
-      let newLivreur =  this.livreurRepository.create(createLivreurDto);
-        newLivreur.isActive = true
-       
+    //   let newLivreur =  this.livreurRepository.create(createLivreurDto);
+    //     newLivreur.isActive = true
+    //    console.log("user",newLivreur)
         
-        newLivreur.password = (await this.hashPassword(newLivreur.password)).toString()
-        return await this.livreurRepository.save(newLivreur);
-      }
+    //     newLivreur.password = await ((await this.hashPassword(newLivreur.password)).toString())
+    //     console.log('newLivreur',newLivreur.password)
+    //     return await this.livreurRepository.save(newLivreur);
+    //   }
       
-      async hashPassword(password: string): Promise<string> {
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-        return hashedPassword;
+    //   async hashPassword(password: string): Promise<string> {
+    //     const saltRounds = 10
+
+    //     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    //     return hashedPassword;
     
     
-      }
+    //   }
       findAll(): Promise<[Livreur[], number]> {
     
         return this.livreurRepository.findAndCount()
@@ -77,6 +83,7 @@ export class LivreurService {
         let resultDelete: boolean = null
         let resultDisable: boolean = null
         const allIntegers = toDelete.every(item => Number.isInteger(item));
+
     if (!allIntegers) {
         console.log('Invalid data in toDelete array');
         return;
@@ -89,7 +96,6 @@ export class LivreurService {
             resultDelete = false
             console.log("unitsResposity",this.livreurRepository)
         }
-    
       return true 
       }
      

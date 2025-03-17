@@ -1,6 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, } from 'typeorm';
-
-
 @Entity('user')
 export class User {
   @PrimaryGeneratedColumn({ name: 'id' })
@@ -10,8 +8,7 @@ export class User {
   @Column("text",{ name:'lastName' ,nullable: true })
   lastName: string;
   @Column( "text",{name:"password" ,nullable: true })
-  password: string;
- 
+  password: string
   @Column('text',{name:"confirmPassword",nullable:true}) 
   confirmPassword: string;
   @Column("text" ,{ name:'email',nullable: true })
@@ -32,5 +29,7 @@ export class User {
   updatedBy: number;
   @Column('boolean',{name:"active",nullable:true})
   isActive:boolean
+  @Column('integer',{name:"saltround",nullable:true})
+  saltround:number
 }
   

@@ -6,6 +6,7 @@ export class CreateUserDto {
     email: string;
     role: string;
     telephone:number;
+    confirmPassword:string;
     
   
 }
