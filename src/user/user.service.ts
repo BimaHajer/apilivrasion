@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+// import bcrypt from 'bcrypt';
 
 const bcrypt=require('bcrypt')
 @Injectable()
@@ -13,7 +14,7 @@ export class UserService {
     private readonly userRepository:Repository<User>
     ){}
     
-    async findOne(email:string):Promise<User |undefined>{
+    async findOneByEmail(email:string):Promise<User |undefined>{
       return await this.userRepository.findOne({where:{email:email}})
     }
       async findId(email:string):Promise<number| undefined>
@@ -75,7 +76,6 @@ export class UserService {
         const allIntegers = toDelete.every(item => Number.isInteger(item));
     if (!allIntegers) {
         console.log('Invalid data in toDelete array');
-        // Handle the error appropriately
         return;
     }
     
