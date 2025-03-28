@@ -16,6 +16,7 @@ import { TvaModule } from './tva/tva.module';
 import { DetailsModule } from './details/details.module';
 import { CommandeModule } from './commande/commande.module';
 import { DetailCommandeModule } from './detail-commande/detail-commande.module';
+import { BoutiqueModule } from './boutique/boutique.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { DetailCommandeModule } from './detail-commande/detail-commande.module';
     DetailsModule,
     CommandeModule,
     DetailCommandeModule,
+    BoutiqueModule,
    
   ],
   controllers: [AppController],
