@@ -6,4 +6,5 @@ export class CreateTvaDto {
     description: string;
   
     value: number;
+    exemples: string;
 }

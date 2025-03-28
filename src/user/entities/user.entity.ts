@@ -3,10 +3,10 @@ import { Entity, PrimaryGeneratedColumn, Column, } from 'typeorm';
 export class User {
   @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
-  @Column("text",{ name:'firstName' ,nullable: true })
-  firstName: string;
-  @Column("text",{ name:'lastName' ,nullable: true })
-  lastName: string;
+  @Column("text",{ name:'firstname' ,nullable: true })
+  firstname: string;
+  @Column("text",{ name:'lastname' ,nullable: true })
+  lastname: string;
   @Column( "text",{name:"password" ,nullable: true })
   password: string
   @Column('text',{name:"confirmPassword",nullable:true}) 

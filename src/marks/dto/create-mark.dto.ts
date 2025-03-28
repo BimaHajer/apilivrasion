@@ -3,7 +3,7 @@ import { Picture } from "src/pictures/entities/picture.entity";
 export class CreateMarkDto {
     id: number;
   
-    titre: string;
+    title: string;
   
     description: string;
   

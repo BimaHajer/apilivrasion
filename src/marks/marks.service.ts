@@ -75,7 +75,7 @@ export class MarksService {
           resultDelete = true
         } else
           resultDelete = false
-          console.log("accessoireResposity",this.markResposity)
+          console.log("markResposity",this.markResposity)
       }
 
     return true

@@ -14,6 +14,8 @@ import { RestaurantModule } from './restaurant/restaurant.module';
 import { PriceModule } from './price/price.module';
 import { TvaModule } from './tva/tva.module';
 import { DetailsModule } from './details/details.module';
+import { CommandeModule } from './commande/commande.module';
+import { DetailCommandeModule } from './detail-commande/detail-commande.module';
 
 @Module({
   imports: [
@@ -42,6 +44,8 @@ import { DetailsModule } from './details/details.module';
     PriceModule,
     TvaModule,
     DetailsModule,
+    CommandeModule,
+    DetailCommandeModule,
    
   ],
   controllers: [AppController],

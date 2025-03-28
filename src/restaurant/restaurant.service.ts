@@ -14,6 +14,21 @@ export class RestaurantService {
   ){}
   async create(createRestaurantDto: CreateRestaurantDto) {
     let newRestaurant=this.restaurantResposity.create(createRestaurantDto)
+    const cloudinary = require('cloudinary');
+    cloudinary.v2.config({
+      cloud_name: 'djqzhs9uw',
+      api_key: '928451266649289',
+      api_secret: '2pT3_lVW9gdHVbkbDst2q1fKaME',
+      secure: true,
+    });
+          let  cloud= await cloudinary.uploader.upload(newRestaurant.picture,{ eager: [{ fetch_format: "auto" } ]}, function (error: any, result: any,) {
+
+              if (result?.eager[0].url) {
+                newRestaurant.picture = result.eager[0].url;  
+            }
+          })          
+          console.log("result?.eager[0].url",cloud)
+newRestaurant.picture= await cloud.url
     return await this.restaurantResposity.save(newRestaurant)
   }
 
@@ -48,9 +63,16 @@ export class RestaurantService {
   
 
     
-    async remove(id: string) {
-      return await this.restaurantResposity.delete(id);
-    }
+    
+async remove(id: number) {
+  const result = await this.restaurantResposity.delete(id);
+  
+  if (result.affected === 0) {
+    throw new NotFoundException(`Restaurant #${id} not found`);
+  }
+  
+  return { success: true, message: `Restaurant #${id} deleted` };
+}
     // toDisable: number[], idUser?: number
   async removeMultiple(toDelete: number[]) {   
     

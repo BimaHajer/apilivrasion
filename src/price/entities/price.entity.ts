@@ -32,8 +32,8 @@ export class Price {
     @Column('boolean',{name:"active",nullable:true})
     isActive:boolean
   // Realation
-  @OneToMany(() => Tva, (produitTva: Tva) => produitTva.priceId,{cascade:true})
-  produitTvaproductTax: Tva[];
+  // @OneToMany(() => Tva, (produitTva: Tva) => produitTva.priceId,{cascade:true})
+  // produitTvaproductTax: Tva[];
   //relation
  
 //   @ManyToMany(() => ProduitDetail, (produitDetail: ProduitDetail) => produitDetail.priceId,{cascade:true})

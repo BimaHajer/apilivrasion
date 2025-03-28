@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Commande } from 'src/commande/entities/commande.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('client')
 export class Client {
@@ -33,4 +34,8 @@ export class Client {
   updatedBy: number;
   @Column('boolean',{name:"active",nullable:true})
   isActive:boolean
+
+  
+  @OneToMany(() => Commande, (commande: Commande) => commande.ClientId,{cascade:true})
+     commande: Commande[];
 }

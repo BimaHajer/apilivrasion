@@ -26,33 +26,29 @@ export class ClientService {
         const client=await this.clientRepository.findOne({ where:{email:email}});
         return client.id 
       }
-      async create(createClientDto: CreateClientDto) {
-          let newClient=this.clientRepository.create(createClientDto)
-          return await this.clientRepository.save(newClient)
+   
+     
+      async create(createClientDto: CreateClientDto): Promise<Client> {
+        if (!createClientDto.password) {
+          throw new Error("Password is required");
         }
-
-     
-      // async create(createClientDto: CreateClientDto): Promise<Client> {
-      //   if (!createClientDto.password) {
-      //     throw new Error("Password is required");
-      //   }
       
-      //   let newClient = this.clientRepository.create({ ...createClientDto });
-      //   newClient.isActive = true;
-      //   newClient.password = await this.hashPassword(createClientDto.password);
+        let newClient = this.clientRepository.create({ ...createClientDto });
+        newClient.isActive = true;
+        newClient.password = await this.hashPassword(createClientDto.password);
       
-      //   return await this.clientRepository.save(newClient);
-      // }
+        return await this.clientRepository.save(newClient);
+      }
       
      
-      // async hashPassword(password: string): Promise<string> {
-      //   if (!password) {
-      //     throw new Error("Password is required for hashing");
-      //   }
+      async hashPassword(password: string): Promise<string> {
+        if (!password) {
+          throw new Error("Password is required for hashing");
+        }
       
-      //   const saltRounds = 10; 
-      //   return await bcrypt.hash(password, saltRounds);
-      // }
+        const saltRounds = 10; 
+        return await bcrypt.hash(password, saltRounds);
+      }
       async findAll(): Promise<Client[]> {
         // Utilise ton repository pour récupérer tous les clients
         return await this.clientRepository.find();

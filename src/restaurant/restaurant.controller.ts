@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { RestaurantService } from './restaurant.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
@@ -28,9 +28,10 @@ export class RestaurantController {
   }
 
   @Delete('delete-restaurant/:id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {  // Utilisez ParseIntPipe pour la conversion
     return this.restaurantService.remove(id);
   }
+  
   @Post('delete-multiple')
   removeMultiple(@Body('') toDelete: number[]) {
    

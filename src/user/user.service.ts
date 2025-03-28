@@ -87,7 +87,7 @@ export class UserService {
             resultDelete = true
           } else
             resultDelete = false
-            console.log("unitsResposity",this.userRepository)
+            console.log("userResposity",this.userRepository)
         }
     
       return true 

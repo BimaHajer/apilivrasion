@@ -27,7 +27,7 @@ export class ProduitDetail{
     // public accessoireId?: Accessoire;
     public markId?: number | Mark;
     public categoryId?: Category;
-    // public unitsId?:  Units;  
+     
     // public priceId?:Price ;
     // public TVAId?:TVA;
     public produitId?: Produit

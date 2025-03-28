@@ -13,6 +13,8 @@ export class Tva {
     description: string;
     @Column('text',{name:"value",nullable:true})
     value: number;
+    @Column('text',{name:"string",nullable:true})
+    exemples: string;
     @Column('date',{name:"createAt",nullable:true})
     createAt:Date;
     @Column('date',{name:"update",nullable:true})
@@ -24,9 +26,9 @@ export class Tva {
     @Column('boolean',{name:"active",nullable:true})
     isActive:boolean
     relation
-    @ManyToOne(() => Price, (price: Price) => price.id)
-    @JoinColumn({ name: "priceId" })
-    priceId: number | null;
+    // @ManyToOne(() => Price, (price: Price) => price.id)
+    // @JoinColumn({ name: "priceId" })
+    // priceId: number | null;
      
     
     

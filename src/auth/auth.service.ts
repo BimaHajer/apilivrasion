@@ -50,6 +50,8 @@ export class AuthService {
       
       async validCLient(email:string,password:string):Promise<any>{
         const client = await this.clientService.findOneByEmail(email);
+        console.log("Client trouvé:", client);
+        console.log("Mot de passe reçu:", password);
         if(client){
           console.log("client",client)
           const isPasswordMatching =await (bcrypt.compare(password,client.password));
@@ -61,6 +63,7 @@ export class AuthService {
         return null;
       }
       async loginCLient (client:  LoginClientDto) {
+        console.log("Données reçues pour login:", client);
         const objectClient :Client= await this.validCLient(client.email,client.password)
         if (objectClient) {
          const payload = { id:objectClient.id,email:objectClient.email};

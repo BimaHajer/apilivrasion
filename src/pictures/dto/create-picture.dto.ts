@@ -6,14 +6,13 @@ export class CreatePictureDto {
   
   
     readonly defaults?: boolean;
-  
-  
+    
     readonly active?: boolean;
-  
-  
+    
     readonly produitId?: number;
-  
-  
+    
     readonly detailId?: number;
+    
+    readonly file?: File;
 
 }

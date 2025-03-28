@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { MarksService } from './marks.service';
 import { CreateMarkDto } from './dto/create-mark.dto';
 import { UpdateMarkDto } from './dto/update-mark.dto';
@@ -8,9 +8,15 @@ export class MarksController {
   constructor(private readonly marksService: MarksService) {}
 
   @Post('create-mark')
-  create(@Body() createMarkDto: CreateMarkDto) {
-    // return "hello"
-    return this.marksService.create(createMarkDto);
+  async createMark(@Body() createMarkDto: CreateMarkDto) {
+    try {
+      return await this.marksService.create(createMarkDto);
+    } catch (error) {
+      throw new HttpException(
+        error.message || 'Internal server error',
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
   }
  
   @Get('marks-list')
@@ -31,11 +37,11 @@ export class MarksController {
   }  
  
 
-  @Delete('delete-mark/:id')
+  @Delete('delete-mark')
   remove(@Param('id') id: string) {
     return this.marksService.remove(id);
   }
-  
+
   @Post('delete-multiple')
   removeMultiple(@Body('') toDelete: number[]) {
  
