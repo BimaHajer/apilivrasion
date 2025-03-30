@@ -17,6 +17,7 @@ import { DetailsModule } from './details/details.module';
 import { CommandeModule } from './commande/commande.module';
 import { DetailCommandeModule } from './detail-commande/detail-commande.module';
 import { BoutiqueModule } from './boutique/boutique.module';
+import { SupermarchéModule } from './supermarché/supermarché.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { BoutiqueModule } from './boutique/boutique.module';
     CommandeModule,
     DetailCommandeModule,
     BoutiqueModule,
+    SupermarchéModule,
    
   ],
   controllers: [AppController],

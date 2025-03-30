@@ -1,5 +1,5 @@
 export class CreateBoutiqueDto {
-   
+        id:number;
         nom: string;
         adresse: string;
         telephone: string;
